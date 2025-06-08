@@ -1,0 +1,18 @@
+import mongoose from "mongoose";
+
+const msgSchema = new mongoose. Schema ({
+    snederId: {
+        type: String,
+        required: true,
+    },
+    receiverId: {
+        type: String, 
+        required: true,
+    },
+    content: {
+        type: String,
+        required: true,
+    },
+}, {timestamps: true });
+
+export const Msg = mongoose.model("Msg", msgSchema);
