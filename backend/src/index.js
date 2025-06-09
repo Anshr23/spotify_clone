@@ -39,7 +39,7 @@ app.use("/api/stats", statsRoutes);
 
 //error handler
 app.use((err,req,res,next) => {
-    res.status.json({message: process.env.NODE_ENV === "production" ? "Internal server prror": err.message });
+    res.status(500).json({message: process.env.NODE_ENV === "production" ? "Internal server prror": err.message });
 });
 
 
