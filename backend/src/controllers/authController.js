@@ -4,7 +4,8 @@ export const authCallback = async (req, res, next) => {
     try {
     const { id, firstName, lastName, imageUrl } = req. body;
 
-    console.log("Auth callback body:", req.body);
+    //for debugging purposes
+    //console.log("Auth callback body:", req.body);
 
     // check if user already exists
     const user = await User.findOne({ clerkId: id });

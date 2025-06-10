@@ -5,9 +5,19 @@ import { cn } from "@/lib/utils";
 import { SignedIn } from "@clerk/clerk-react";
 import { HomeIcon, Library, MessageCircle } from "lucide-react"; 
 import { Link } from "react-router-dom";
+import { useMusicStore } from "@/stores/useMusicStore";
+import { useEffect } from "react";
 
 const LeftSidebar = () => {
-    const isLoading = false;
+    
+    const { albums, fetchAlbums, isLoading } = useMusicStore();
+
+    useEffect(() => {
+        // Fetch albums when the component mounts
+        fetchAlbums();
+    }, [fetchAlbums]);
+    console.log("albums", albums);
+    
     return (
         <div className='h-full flex flex-col gap-2'>
         {/* Navigation menu */}
@@ -56,8 +66,13 @@ const LeftSidebar = () => {
                         {isLoading? (
                             <PlaylistSkeleton/>
                         ): (
-                            "some music"
-                        )}
+                            albums.map((album) => (
+                                <Link to={`/albums/${album._id}`} key={album._id}
+                                className="p-2> hover:bg-zinc-800 rounded-md flex items-center gap-3 group cursor-pointer">
+                                    <img />
+                                </Link>
+                        ))
+                    )}
                     </div>
                 </ScrollArea>
 
