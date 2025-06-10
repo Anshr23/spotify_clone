@@ -10,6 +10,7 @@ import { connectDB } from "./lib/db.js";
 import { clerkMiddleware } from "@clerk/express";
 import fileUpload from "express-fileupload";
 import path from "path"; 
+import cors from "cors";
 
 const __dirname = path.resolve();
 const app = express();
@@ -18,17 +19,23 @@ dotenv.config();
 
 const PORT = process.env.PORT || 5001;
 
-app.use(express.json());   //to parse req.body
-app.use(clerkMiddleware());   // this will add auth to req obj => req.auth.userId
-app.use(fileUpload({
-    useTempFiles: true,
-    tempFileDir: path.join(__dirname, "tmp"),
-    createParentPath: true,
-    limits: {
-        fileSize: 10 * 1024 * 1024, //10MB max file size
-    }
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true
 }));
 
+app.use(express.json());   //to parse req.body
+app.use(clerkMiddleware());   // this will add auth to req obj => req.auth.userId
+app.use(
+    fileUpload({
+        useTempFiles: true,
+        tempFileDir: path.join(__dirname, "tmp"),
+        createParentPath: true,
+        limits: {
+            fileSize: 10 * 1024 * 1024, //10MB max file size
+        },
+    })
+);
 
 app.use("/api/users", userRoutes);
 app.use("/api/admin", adminRoutes);
