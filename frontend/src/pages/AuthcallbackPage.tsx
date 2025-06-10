@@ -13,16 +13,21 @@ const AuthCallbackPage = () => {
   useEffect(() => {
     const syncUser = async () => {
       if (!isLoaded || !user || syncAttempt.current) return;
+
       try {
+
         syncAttempt.current = true;
-        await axiosInstance.post("/auth/callback", {
+
+        await axiosInstance.post("/api/auth/callback", {
           id: user.id,
           firstName: user.firstName,
           lastName: user.lastName,
           imageUrl: user.imageUrl
         })
+
       } catch (error) {
         console.log("Error in auth callback", error);
+        
       } finally {
         navigate("/");
       }
