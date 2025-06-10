@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const msgSchema = new mongoose. Schema ({
-    snederId: {
+    senderId: {
         type: String,
         required: true,
     },

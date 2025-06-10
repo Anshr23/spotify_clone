@@ -1,3 +1,4 @@
+import {User} from "../models/userModel.js";
 
 export const getAllusers = async (req, res, next) => {
     try {
@@ -9,4 +10,5 @@ export const getAllusers = async (req, res, next) => {
         consolee.log("Error in getAllusers", error);
         next(error);
     }
-}
+};
+
