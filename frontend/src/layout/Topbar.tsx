@@ -1,10 +1,10 @@
-import SignInOAuthButton from './SignInOAuthButton';
 import { LayoutDashboardIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SignedOut, UserButton } from '@clerk/clerk-react';
 import { useAuthStore } from '@/stores/useAuthStore';
-import { buttonVariants } from './ui/button';
 import { cn } from '@/lib/utils';
+import { buttonVariants } from '@/components/ui/button';
+import SignInOAuthButton from '@/components/SignInOAuthButton';
 
 
 const Topbar = () => {
