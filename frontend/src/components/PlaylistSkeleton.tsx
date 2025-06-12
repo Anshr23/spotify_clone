@@ -10,5 +10,6 @@ const PlaylistSkeleton = () => {
 		</div>
 	));
 };
+
 export default PlaylistSkeleton;
 

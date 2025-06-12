@@ -25,4 +25,5 @@ const StatsCard = ({ bgColor, icon: Icon, iconColor, label, value }: StatsCardPr
 		</Card>
 	);
 };
+
 export default StatsCard;

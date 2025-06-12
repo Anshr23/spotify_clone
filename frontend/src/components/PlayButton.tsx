@@ -29,4 +29,5 @@ const PlayButton = ({ song }: { song: Song }) => {
 		</Button>
 	);
 };
+
 export default PlayButton;
