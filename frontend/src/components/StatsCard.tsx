@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 
+//same like interface with a little differences
 type StatsCardProps = {
 	icon: React.ElementType;
 	label: string;
@@ -8,7 +9,7 @@ type StatsCardProps = {
 	iconColor: string;
 };
 
-const StatsCard = ({ bgColor, icon: Icon, iconColor, label, value }: StatsCardProps) => {
+const StatsCard = ({ bgColor, icon:Icon, iconColor, label, value }: StatsCardProps) => {
 	return (
 		<Card className='bg-zinc-800/50 border-zinc-700/50 hover:bg-zinc-800/80 transition-colors'>
 			<CardContent className='p-6'>
