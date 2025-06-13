@@ -14,7 +14,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0 <19.0.0"
+  },
   "bugs": {
     "url": "https://github.com/jackofall-trades/spotify_clone/issues"
   },
