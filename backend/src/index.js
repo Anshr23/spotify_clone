@@ -7,6 +7,9 @@ import fileUpload from "express-fileupload";
 import path from "path"; 
 import cors from "cors";
 import { createServer } from "http";
+
+import cron from "node-cron";
+
 import { initializeSocket } from "./lib/socket.js";
 
 import userRoutes from "./routes/userRoutes.js";
@@ -32,6 +35,25 @@ app.use(cors({
     credentials: true
 }));
 
+const tempDir = path.join(process.cwd(), "tmp");
+// Ensure the temporary directory exists
+//cron jobs
+cron.schedule("0 0 * * *", () => {
+    if(fs.existsSync(tempDir)) {
+        fs.readdir(tempDir, (err, files) => {
+            if (err) {
+                console.log("error", err);
+                return;
+            }
+        for(const file of files) {
+            fs.unlink(path.join(tempDir, file), (err) => {
+                
+            });
+        }
+        });
+    }
+});
+
 app.use(express.json());   //to parse req.body
 app.use(clerkMiddleware());   // this will add auth to req obj => req.auth.userId
 app.use(
@@ -51,6 +73,13 @@ app.use("/api/auth", authRoutes);
 app.use("/api/songs", songRoutes);
 app.use("/api/albums", albumRoutes);
 app.use("/api/stats", statsRoutes);
+
+if(process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "../frontend/dist")));
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html"));
+    });
+}
 
 //error handler
 app.use((err,req,res,next) => {
