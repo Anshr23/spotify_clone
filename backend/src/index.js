@@ -1,16 +1,21 @@
 import express from "express";
 import dotenv from "dotenv";
+
+import { connectDB } from "./lib/db.js";
+import { clerkMiddleware } from "@clerk/express";
+import fileUpload from "express-fileupload";
+import path from "path"; 
+import cors from "cors";
+import { createServer } from "http";
+import { intializeSocket } from "./lib/socket.js";
+
 import userRoutes from "./routes/userRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import songRoutes from "./routes/songRoutes.js";
 import albumRoutes from "./routes/albumRoutes.js";
 import statsRoutes from "./routes/statsRouts.js";
-import { connectDB } from "./lib/db.js";
-import { clerkMiddleware } from "@clerk/express";
-import fileUpload from "express-fileupload";
-import path from "path"; 
-import cors from "cors";
+
 
 const __dirname = path.resolve();
 const app = express();
@@ -18,6 +23,9 @@ const app = express();
 dotenv.config();
 
 const PORT = process.env.PORT || 5001;
+
+const httpServer = createServer(app);
+intializeSocket(httpServer);
 
 app.use(cors({
     origin: "http://localhost:3000",
@@ -50,7 +58,8 @@ app.use((err,req,res,next) => {
 });
 
 
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
     console.log(`server is running at ${PORT}`);
     connectDB();
 });
+
