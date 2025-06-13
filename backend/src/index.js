@@ -1,17 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
-
-import { connectDB } from "./lib/db.js";
-import { clerkMiddleware } from "@clerk/express";
-import fileUpload from "express-fileupload";
-import path from "path"; 
+import { fileURLToPath } from "url";
+import path from "path";
 import cors from "cors";
 import { createServer } from "http";
-
 import cron from "node-cron";
-
 import { initializeSocket } from "./lib/socket.js";
-
 import userRoutes from "./routes/userRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
@@ -19,8 +13,9 @@ import songRoutes from "./routes/songRoutes.js";
 import albumRoutes from "./routes/albumRoutes.js";
 import statsRoutes from "./routes/statsRouts.js";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const __dirname = path.resolve();
 const app = express();
 
 dotenv.config();
@@ -75,9 +70,9 @@ app.use("/api/albums", albumRoutes);
 app.use("/api/stats", statsRoutes);
 
 if(process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "../frontend/dist")));
+    app.use(express.static(path.join(__dirname, "../../frontend/dist")));
     app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html"));
+        res.sendFile(path.resolve(__dirname, "../../frontend/dist/index.html"));
     });
 }
 
