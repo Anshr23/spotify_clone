@@ -6,7 +6,7 @@ import ChatHeader from "@/components/ChatHeader";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import MessageInput from "@/components/MessageInput";
-import UsersListSkeleton from "@/components/UsersListSkeleton";
+import UsersList from "../components/UsersList";
 
 const formatTime = (date: string) => {
 	return new Date(date).toLocaleTimeString("en-US", {
@@ -35,7 +35,7 @@ const ChatPage = () => {
 			<Topbar />
 
 			<div className='grid lg:grid-cols-[300px_1fr] grid-cols-[80px_1fr] h-[calc(100vh-180px)]'>
-				<UsersListSkeleton />
+				<UsersList />
 
 				{/* chat message */}
 				<div className='flex flex-col h-full'>

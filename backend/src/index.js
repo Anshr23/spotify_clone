@@ -7,7 +7,7 @@ import fileUpload from "express-fileupload";
 import path from "path"; 
 import cors from "cors";
 import { createServer } from "http";
-import { intializeSocket } from "./lib/socket.js";
+import { initializeSocket } from "./lib/socket.js";
 
 import userRoutes from "./routes/userRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
@@ -25,7 +25,7 @@ dotenv.config();
 const PORT = process.env.PORT || 5001;
 
 const httpServer = createServer(app);
-intializeSocket(httpServer);
+initializeSocket(httpServer);
 
 app.use(cors({
     origin: "http://localhost:3000",
