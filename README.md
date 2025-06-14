@@ -1,6 +1,8 @@
 # Spotify Clone - Full-Stack Music Platform
 
-![Spotify Clone](./frontend/public/spotify.png)
+<p align="center">
+  <img src="./frontend/public/spotify.png" alt="Spotify Clone Logo" width="200"/>
+</p>
 
 A feature-rich, full-stack clone of the Spotify web application, built with modern technologies. This project showcases a complete user experience, from authentication and music playback to real-time chat and friend activity updates. It also includes a secure, dedicated admin panel for comprehensive content management.
 
