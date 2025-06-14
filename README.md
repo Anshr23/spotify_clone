@@ -6,7 +6,7 @@
 
 A feature-rich, full-stack clone of the Spotify web application, built with modern technologies. This project showcases a complete user experience, from authentication and music playback to real-time chat and friend activity updates. It also includes a secure, dedicated admin panel for comprehensive content management.
 
-**Live Demo:** [**spotify-clone-9xd3.onrender.com**](https://spotify-clone-9xd3.onrender.com)
+**Live Demo:** [**spotify-clone**](https://spotify-clone-9xd3.onrender.com)
 
 ---
 
