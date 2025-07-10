@@ -8,6 +8,13 @@ A feature-rich, full-stack clone of the Spotify web application, built with mode
 
 **Live Demo:** [**spotify-clone**](https://spotify-clone-9xd3.onrender.com)
 
+<img 
+  src="https://raw.githubusercontent.com/Anshr23/spotify_clone/main/frontend/public/demo.png" 
+  alt="Demo Screenshot" 
+  width="500" 
+  style="border: 1px solid #ddd; border-radius: 4px;" 
+/>
+
 ---
 
 ## ✨ Features
