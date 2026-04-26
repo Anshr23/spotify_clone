@@ -11,6 +11,17 @@ export default defineConfig({
   server: {
     port: 3000, // Change this to your desired port
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ["react", "react-dom", "react-router-dom"],
+          clerk: ["@clerk/clerk-react"],
+          socket: ["socket.io-client"],
+        },
+      },
+    },
+  },
   plugins: [react()],
   resolve: {
     alias: {

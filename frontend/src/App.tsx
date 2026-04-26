@@ -1,13 +1,15 @@
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom"
-import HomePage from "./pages/HomePage"
-import AuthcallbackPage from "./pages/AuthcallbackPage"
 import { AuthenticateWithRedirectCallback } from "@clerk/clerk-react";
-import MainLayout from "./layout/MainLayout";
-import ChatPage from "./pages/ChatPage";
-import AlbumPage from "./pages/AlbumPage";
-import AdminPage from "./pages/AdminPage";
 import { Toaster } from "react-hot-toast"
-import NotFoundPage from "./pages/NotFoundPage";
+
+const HomePage = lazy(() => import("./pages/HomePage"));
+const AuthcallbackPage = lazy(() => import("./pages/AuthcallbackPage"));
+const MainLayout = lazy(() => import("./layout/MainLayout"));
+const ChatPage = lazy(() => import("./pages/ChatPage"));
+const AlbumPage = lazy(() => import("./pages/AlbumPage"));
+const AdminPage = lazy(() => import("./pages/AdminPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 
 
@@ -15,18 +17,20 @@ function App() {
   
   return (
     <>
-      <Routes>
-        <Route path='/sso-callback' element={<AuthenticateWithRedirectCallback signUpForceRedirectUrl={"/auth-callback"}/> } />
-        <Route path="/auth-callback" element={<AuthcallbackPage/>}/>
-        <Route path="/admin" element={<AdminPage/>}/>
+      <Suspense fallback={<div className="p-4 text-sm text-zinc-400">Loading...</div>}>
+        <Routes>
+          <Route path='/sso-callback' element={<AuthenticateWithRedirectCallback signUpForceRedirectUrl={"/auth-callback"}/> } />
+          <Route path="/auth-callback" element={<AuthcallbackPage/>}/>
+          <Route path="/admin" element={<AdminPage/>}/>
 
-        <Route element={<MainLayout/>}>
-          <Route path="/" element={<HomePage/>}/>
-          <Route path="/chat" element={<ChatPage/>}/>
-          <Route path="/albums/:albumId" element={<AlbumPage/>}/>
-          <Route path="*" element={<NotFoundPage/>}/>
-        </Route>
-      </Routes>
+          <Route element={<MainLayout/>}>
+            <Route path="/" element={<HomePage/>}/>
+            <Route path="/chat" element={<ChatPage/>}/>
+            <Route path="/albums/:albumId" element={<AlbumPage/>}/>
+            <Route path="*" element={<NotFoundPage/>}/>
+          </Route>
+        </Routes>
+      </Suspense>
       <Toaster/>
     </>
   );
