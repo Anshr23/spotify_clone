@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import fs from "fs";
 
 import { connectDB } from "./lib/db.js";
 import { clerkMiddleware } from "@clerk/express";
@@ -31,8 +32,8 @@ const httpServer = createServer(app);
 initializeSocket(httpServer);
 
 app.use(cors({
-    origin: "http://localhost:3000",
-    credentials: true
+  origin: process.env.CLIENT_URL || "http://localhost:3000",
+  credentials: true,
 }));
 
 const tempDir = path.join(process.cwd(), "tmp");
